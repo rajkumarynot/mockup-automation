@@ -1,0 +1,67 @@
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Orders Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="p-4">
+    <h2>Processed Orders</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>PDF</th>
+                <th>HTML Preview</th>
+                <th>Status</th>
+                <th>Updated</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($orders as $order)
+            <tr>
+                <td>{{ $order->order_id }}</td>
+                <td>
+    @if(file_exists($order->pdf_path))
+        <a href="{{ asset('storage/pdfs/' . basename($order->pdf_path)) }}" target="_blank" class="btn btn-sm btn-outline-primary">View PDF</a>
+    @else
+        <span class="text-danger">Not Found</span>
+    @endif
+</td>
+<td>
+
+
+    <a href="{{ route('orders.preview', $order->order_id) }}" target="_blank" class="btn btn-sm btn-secondary">HTML Preview</a>
+</td>
+<td>
+    @if($order->email_sent)
+        <span class="badge bg-success">Sent</span>
+    @else
+        <form action="{{ route('orders.send', ['order_id' => $order->order_id]) }}" method="POST">
+            @csrf
+            <button class="btn btn-sm btn-warning">Send Mail</button>
+        </form>
+
+        
+
+        <!-- <a href="{{ route('orders.send', ['order_id' => $order->order_id]) }}" class="btn btn-primary">Send Mail</a> -->
+    @endif
+</td>
+
+                <td>{{ $order->updated_at->format('d-m-Y H:i') }}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</body>
+</html>
