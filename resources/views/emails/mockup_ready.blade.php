@@ -11,6 +11,7 @@
 <p>Your mockup for <strong>Order #{{ $orderId }}</strong> is ready.</p>
         <p>You can preview it using the link below:</p>
         <p>
+            
             <a href="{{ $previewUrl }}" style="color: #007bff; text-decoration: none;">
                 {{ $previewUrl }}
             </a>

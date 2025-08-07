@@ -8,6 +8,7 @@ use App\Models\OrderAutomation; // <--- ADD THIS
 use App\Mail\MockupPreviewMail;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\CustomerMockupMail;
+use App\Models\Customer;
 
 class ReadEmailCommand extends Command
 {
@@ -76,22 +77,36 @@ class ReadEmailCommand extends Command
                         );
                     }
 
-                    $customerEmail = $data['order']['email'] ?? null;
+                   $customerEmail = $data['order']['email'] ?? null;
 
-                    if ($customerEmail) {
-                        $previewUrl = url("/html/preview/{$orderId}");
+$customerName = 'Customer';
+$first = $data['order']['customer']['first_name'] ?? '';
+$last = $data['order']['customer']['last_name'] ?? '';
+$fullName = trim("$first $last");
+if ($fullName !== '') {
+    $customerName = $fullName;
+}
 
-                        Mail::to($customerEmail)->send(new MockupPreviewMail($orderId, $previewUrl, $customerName));
+if ($customerEmail) {
+    $previewUrl = url("/html/preview/{$orderId}");
 
-                        OrderAutomation::updateOrCreate(
-                            ['order_id' => $orderId],
-                            ['mail_sent' => true]
-                        );
+    Mail::to($customerEmail)->send(new MockupPreviewMail($orderId, $previewUrl, $customerName));
 
-                        $this->info("✅ Sent email to customer: {$customerEmail}");
-                    } else {
-                        $this->warn("⚠️  No customer email found for Order: {$orderId}");
-                    }
+    OrderAutomation::updateOrCreate(
+        ['order_id' => $orderId],
+        [
+            'mail_sent'       => true,
+            'customer_name'   => $customerName,
+            'customer_email'  => $customerEmail,
+        ]
+    );
+
+    $this->info("✅ Sent email to customer: {$customerEmail}");
+    $this->info("✅ Customer info stored in order_automations: {$customerName} ({$customerEmail})");
+} else {
+    $this->warn("⚠️  No customer email found for Order: {$orderId}");
+}
+
 
 
                     $this->info("Processed Order: " . $orderId);
@@ -99,6 +114,17 @@ class ReadEmailCommand extends Command
             }
 
             $message->setFlag(['Seen']);
+            $shopifyEmail = $data['order']['email'] ?? null;
+$shopifyName = trim(($data['order']['customer']['first_name'] ?? '') . ' ' . ($data['order']['customer']['last_name'] ?? ''));
+
+if ($shopifyEmail) {
+    $customer = \App\Models\Customer::firstOrCreate(
+        ['email' => $shopifyEmail],
+        ['name' => $shopifyName]
+    );
+    $this->info("✅ Customer stored: {$shopifyName} ({$shopifyEmail})");
+}
+
         }
 
         $this->info("Command executed successfully.");

@@ -23,26 +23,32 @@ class OrderAutomationController extends Controller
         // return view('html.preview', ['order_id' => $order_id]);
         return view('html_templates.order_template', compact('data'));
     }
-public function sendMail($orderId)
-{
-    $order = \App\Models\OrderAutomation::where('order_id', $orderId)->firstOrFail();
 
-    $customerEmail = $order->shopify_data['email'] ?? null;
 
-    if (!$customerEmail) {
-        return redirect()->route('orders.index')->with('error', 'No customer email found.');
+    
+    public function sendMail($orderId)
+    {
+        $order = \App\Models\OrderAutomation::where('order_id', $orderId)->firstOrFail();
+
+        $customerEmail = $order->shopify_data['email'] ?? null;
+
+        if (!$customerEmail) {
+            return redirect()->route('orders.index')->with('error', 'No customer email found.');
+        }
+
+        // Send the mail
+        Mail::to($customerEmail)->send(new OrderPreviewMail($order->order_id));
+
+        // Mark as sent
+        $order->email_sent = true;
+        $order->save();
+
+        return redirect()->route('orders.index')->with('success', "Preview mail sent to {$customerEmail}");
     }
 
-    // Send the mail
-    Mail::to($customerEmail)->send(new OrderPreviewMail($order->order_id));
 
-    // Mark as sent
-    $order->email_sent = true;
-    $order->save();
 
-    return redirect()->route('orders.index')->with('success', "Preview mail sent to {$customerEmail}");
-}
-public function sendPreviewEmail($order_id)
+ public function sendPreviewEmail($order_id)
 {
     $order = OrderAutomation::where('order_id', $order_id)->first();
 
@@ -51,19 +57,44 @@ public function sendPreviewEmail($order_id)
     }
 
     try {
-        $customerEmail = $order->shopify_data['email'] ?? 'rajkumar@y-not.com';
-        $previewUrl = url('/html/preview/' . $order_id);
+        $shopifyData = $order->shopify_data;
+        $customerEmail = $order->customer_email; // 📥 Direct from DB
 
-        \Mail::raw("Hello Customer,\n\nYour mockup for Order #$order_id is ready.\nPreview it here: $previewUrl\n\nRegards,\nY-Not Team", function ($message) use ($customerEmail) {
-            $message->to($customerEmail)
-                    ->subject('Mockup Preview');
-        });
+        if (!$customerEmail) {
+            return redirect()->back()->with('error', '❌ Customer email not found in order data.');
+        }
 
-        // Mark as sent
+        // $previewUrl = url('/html/preview/' . $order_id);
+
+        // \Mail::raw("Hello $order->customer_name,\n\nYour mockup for Order #$order_id is ready.\nPreview it here: $previewUrl\n\n
+        // Regards,\nY-Not Team", 
+        // function ($message) use ($customerEmail) {
+        //     $message->to($customerEmail)
+        //             ->subject('Mockup Preview');
+        // });
+$previewUrl = url('/html/preview/' . $order_id);
+
+\Mail::send('emails.mockup_ready', [
+    'order' => $order,
+    'orderId' => $order->order_id,
+    'customerName' => $order->customer_name,
+    'previewUrl' => $previewUrl, // ✅ add this
+], function ($message) use ($customerEmail, $order_id) {
+    $message->to($customerEmail)
+            ->subject("Mockup Ready - Order #$order_id");
+});
+
+
+
+
+
         $order->email_sent = true;
         $order->save();
 
-        \Log::info("✅ Mail sent to $customerEmail for Order ID: $order_id");
+        \Log::info("✅ Mail sent", [
+            'email' => $customerEmail,
+            'order_id' => $order_id
+        ]);
 
         return redirect()->back()->with('success', "✅ Mail sent to $customerEmail");
     } catch (\Exception $e) {
@@ -71,5 +102,6 @@ public function sendPreviewEmail($order_id)
         return redirect()->back()->with('error', '❌ Failed to send email: ' . $e->getMessage());
     }
 }
+
 
 }

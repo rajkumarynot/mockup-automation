@@ -3,7 +3,8 @@
 <p>Your mockup for Order <strong>#{{ $orderId }}</strong> is ready.</p>
 
 <p>
-    <a href="{{ url('/html/preview/' . $orderId) }}" target="_blank">
+    <!-- <a href="{{ url('/html/preview/' . $orderId) }}" target="_blank"> -->
+         <a href="{{ route('orders.preview', $orderId) }}" target="_blank">
         Click here to view your mockup
     </a>
 </p>

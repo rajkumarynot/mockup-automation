@@ -21,6 +21,8 @@
         <thead>
             <tr>
                 <th>Order ID</th>
+                <th>Customer Name</th>
+                <th>Customer Email</th>
                 <th>PDF</th>
                 <th>HTML Preview</th>
                 <th>Status</th>
@@ -31,32 +33,29 @@
             @foreach($orders as $order)
             <tr>
                 <td>{{ $order->order_id }}</td>
+                <td>{{ $order->customer_name }}</td>
+                <td>{{ $order->customer_email }}</td>
                 <td>
-    @if(file_exists($order->pdf_path))
-        <a href="{{ asset('storage/pdfs/' . basename($order->pdf_path)) }}" target="_blank" class="btn btn-sm btn-outline-primary">View PDF</a>
-    @else
-        <span class="text-danger">Not Found</span>
-    @endif
-</td>
-<td>
-
-
-    <a href="{{ route('orders.preview', $order->order_id) }}" target="_blank" class="btn btn-sm btn-secondary">HTML Preview</a>
-</td>
-<td>
-    @if($order->email_sent)
-        <span class="badge bg-success">Sent</span>
-    @else
-        <form action="{{ route('orders.send', ['order_id' => $order->order_id]) }}" method="POST">
-            @csrf
-            <button class="btn btn-sm btn-warning">Send Mail</button>
-        </form>
-
-        
-
-        <!-- <a href="{{ route('orders.send', ['order_id' => $order->order_id]) }}" class="btn btn-primary">Send Mail</a> -->
-    @endif
-</td>
+                    @if(file_exists($order->pdf_path))
+                        <a href="{{ asset('storage/pdfs/' . basename($order->pdf_path)) }}" target="_blank" class="btn btn-sm btn-outline-primary">View PDF</a>
+                    @else
+                        <span class="text-danger">Not Found</span>
+                    @endif
+                </td>
+                <td>
+                    <a href="{{ route('orders.preview', $order->order_id) }}" target="_blank" class="btn btn-sm btn-secondary">HTML Preview</a>
+                </td>
+                <td>
+                    @if($order->email_sent)
+                        <span class="badge bg-success">Sent</span>
+                    @else
+                        <form action="{{ route('orders.send', ['order_id' => $order->order_id]) }}" method="POST">
+                            @csrf
+                            <button class="btn btn-sm btn-warning">Send Mail</button>
+                        </form>  
+                        <!-- <a href="{{ route('orders.send', ['order_id' => $order->order_id]) }}" class="btn btn-primary">Send Mail</a> -->
+                    @endif
+                </td>
 
                 <td>{{ $order->updated_at->format('d-m-Y H:i') }}</td>
             </tr>

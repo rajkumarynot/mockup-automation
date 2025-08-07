@@ -1,0 +1,384 @@
+{
+    "order": {
+        "id": 6657696039216,
+        "admin_graphql_api_id": "gid:\/\/shopify\/Order\/6657696039216",
+        "app_id": 1354745,
+        "browser_ip": "2405:201:d01c:902b:60b0:fbf7:b6bc:1ddf",
+        "buyer_accepts_marketing": false,
+        "cancel_reason": null,
+        "cancelled_at": null,
+        "cart_token": null,
+        "checkout_id": 39700883767600,
+        "checkout_token": "0c96ede32be79a1d517f98eaebb98c88",
+        "client_details": {
+            "accept_language": "en-US",
+            "browser_height": null,
+            "browser_ip": "2405:201:d01c:902b:60b0:fbf7:b6bc:1ddf",
+            "browser_width": null,
+            "session_hash": null,
+            "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/138.0.0.0 Safari\/537.36 Edg\/138.0.0.0"
+        },
+        "closed_at": null,
+        "confirmation_number": "EXK5X8W6X",
+        "confirmed": true,
+        "contact_email": "mnb@gmail.com",
+        "created_at": "2025-07-23T02:51:12-04:00",
+        "currency": "USD",
+        "current_subtotal_price": "241.84",
+        "current_subtotal_price_set": {
+            "shop_money": {
+                "amount": "241.84",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "241.84",
+                "currency_code": "USD"
+            }
+        },
+        "current_total_additional_fees_set": null,
+        "current_total_discounts": "0.00",
+        "current_total_discounts_set": {
+            "shop_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            }
+        },
+        "current_total_duties_set": null,
+        "current_total_price": "388.38",
+        "current_total_price_set": {
+            "shop_money": {
+                "amount": "388.38",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "388.38",
+                "currency_code": "USD"
+            }
+        },
+        "current_total_tax": "0.00",
+        "current_total_tax_set": {
+            "shop_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            }
+        },
+        "customer_locale": "en-US",
+        "device_id": null,
+        "discount_codes": [],
+        "duties_included": false,
+        "email": "mnb@gmail.com",
+        "estimated_taxes": false,
+        "financial_status": "paid",
+        "fulfillment_status": null,
+        "landing_site": "\/password",
+        "landing_site_ref": null,
+        "location_id": 102821396784,
+        "merchant_business_entity_id": "MTkxMDQwNTc5ODg4",
+        "merchant_of_record_app_id": null,
+        "name": "#1043",
+        "note": null,
+        "note_attributes": [],
+        "number": 43,
+        "order_number": 1043,
+        "order_status_url": "https:\/\/y-not-online-store.myshopify.com\/91040579888\/orders\/196b49796a598da62136a045b7fd5e67\/authenticate?key=16a40b162eeafb88e4084170e5b3ca7d",
+        "original_total_additional_fees_set": null,
+        "original_total_duties_set": null,
+        "payment_gateway_names": [
+            "bogus"
+        ],
+        "phone": null,
+        "po_number": null,
+        "presentment_currency": "USD",
+        "processed_at": "2025-07-23T02:51:09-04:00",
+        "reference": null,
+        "referring_site": "",
+        "source_identifier": null,
+        "source_name": "shopify_draft_order",
+        "source_url": null,
+        "subtotal_price": "241.84",
+        "subtotal_price_set": {
+            "shop_money": {
+                "amount": "241.84",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "241.84",
+                "currency_code": "USD"
+            }
+        },
+        "tags": "Product_Personalizer",
+        "tax_exempt": false,
+        "tax_lines": [],
+        "taxes_included": false,
+        "test": true,
+        "token": "196b49796a598da62136a045b7fd5e67",
+        "total_cash_rounding_payment_adjustment_set": {
+            "shop_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            }
+        },
+        "total_cash_rounding_refund_adjustment_set": {
+            "shop_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            }
+        },
+        "total_discounts": "0.00",
+        "total_discounts_set": {
+            "shop_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            }
+        },
+        "total_line_items_price": "241.84",
+        "total_line_items_price_set": {
+            "shop_money": {
+                "amount": "241.84",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "241.84",
+                "currency_code": "USD"
+            }
+        },
+        "total_outstanding": "0.00",
+        "total_price": "388.38",
+        "total_price_set": {
+            "shop_money": {
+                "amount": "388.38",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "388.38",
+                "currency_code": "USD"
+            }
+        },
+        "total_shipping_price_set": {
+            "shop_money": {
+                "amount": "146.54",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "146.54",
+                "currency_code": "USD"
+            }
+        },
+        "total_tax": "0.00",
+        "total_tax_set": {
+            "shop_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            }
+        },
+        "total_tip_received": "0.00",
+        "total_weight": 0,
+        "updated_at": "2025-07-23T02:51:16-04:00",
+        "user_id": null,
+        "billing_address": {
+            "first_name": "Harris",
+            "address1": "1041 East 24th Street",
+            "phone": null,
+            "city": "Hialeah",
+            "zip": "33013",
+            "province": "Florida",
+            "country": "United States",
+            "last_name": "S",
+            "address2": null,
+            "company": null,
+            "latitude": 25.8447945,
+            "longitude": -80.2611934,
+            "name": "Harris S",
+            "country_code": "US",
+            "province_code": "FL"
+        },
+        "customer": {
+            "id": 8949080916272,
+            "created_at": "2025-07-23T02:51:09-04:00",
+            "updated_at": "2025-07-23T02:51:16-04:00",
+            "first_name": "Harris",
+            "last_name": "S",
+            "state": "disabled",
+            "note": null,
+            "verified_email": true,
+            "multipass_identifier": null,
+            "tax_exempt": false,
+            "email_marketing_consent": {
+                "state": "not_subscribed",
+                "opt_in_level": "single_opt_in",
+                "consent_updated_at": null
+            },
+            "sms_marketing_consent": null,
+            "tags": "",
+            "email": "mnb@gmail.com",
+            "phone": null,
+            "currency": "USD",
+            "tax_exemptions": [],
+            "admin_graphql_api_id": "gid:\/\/shopify\/Customer\/8949080916272",
+            "default_address": {
+                "id": 10782528209200,
+                "customer_id": 8949080916272,
+                "first_name": "Harris",
+                "last_name": "S",
+                "company": null,
+                "address1": "1041 East 24th Street",
+                "address2": null,
+                "city": "Hialeah",
+                "province": "Florida",
+                "country": "United States",
+                "zip": "33013",
+                "phone": null,
+                "name": "Harris S",
+                "province_code": "FL",
+                "country_code": "US",
+                "country_name": "United States",
+                "default": true
+            }
+        },
+        "discount_applications": [],
+        "fulfillments": [],
+        "line_items": [
+            {
+                "id": 16554407919920,
+                "admin_graphql_api_id": "gid:\/\/shopify\/LineItem\/16554407919920",
+                "attributed_staffs": [],
+                "current_quantity": 8,
+                "fulfillable_quantity": 8,
+                "fulfillment_service": "manual",
+                "fulfillment_status": null,
+                "gift_card": false,
+                "grams": 0,
+                "name": "Joseph Joseph\u00ae Hold-All\u2122 Collapsible 35L Basket - Gray",
+                "price": "30.23",
+                "price_set": {
+                    "shop_money": {
+                        "amount": "30.23",
+                        "currency_code": "USD"
+                    },
+                    "presentment_money": {
+                        "amount": "30.23",
+                        "currency_code": "USD"
+                    }
+                },
+                "product_exists": true,
+                "product_id": 9890604974384,
+                "properties": [
+                    {
+                        "name": "Preview",
+                        "value": "https:\/\/cdn.shopify.com\/s\/files\/1\/0910\/4057\/9888\/uploads\/07b265f0d0ace55b5571c02b06792cf2.png"
+                    },
+                    {
+                        "name": "Upload Logo",
+                        "value": "https:\/\/cdn.shopify.com\/s\/files\/1\/0910\/4057\/9888\/uploads\/116c45acb961ff39f3b135a65a8a006d.png"
+                    },
+                    {
+                        "name": "_pplr_preview",
+                        "value": "Preview"
+                    }
+                ],
+                "quantity": 8,
+                "requires_shipping": true,
+                "sku": "JJ013-35-00",
+                "taxable": true,
+                "title": "Joseph Joseph\u00ae Hold-All\u2122 Collapsible 35L Basket",
+                "total_discount": "0.00",
+                "total_discount_set": {
+                    "shop_money": {
+                        "amount": "0.00",
+                        "currency_code": "USD"
+                    },
+                    "presentment_money": {
+                        "amount": "0.00",
+                        "currency_code": "USD"
+                    }
+                },
+                "variant_id": 49921652883760,
+                "variant_inventory_management": "shopify",
+                "variant_title": "Gray",
+                "vendor": "starline",
+                "tax_lines": [],
+                "duties": [],
+                "discount_allocations": []
+            }
+        ],
+        "payment_terms": null,
+        "refunds": [],
+        "shipping_address": {
+            "first_name": "Harris",
+            "address1": "1041 East 24th Street",
+            "phone": null,
+            "city": "Hialeah",
+            "zip": "33013",
+            "province": "Florida",
+            "country": "United States",
+            "last_name": "S",
+            "address2": null,
+            "company": null,
+            "latitude": 25.8447945,
+            "longitude": -80.2611934,
+            "name": "Harris S",
+            "country_code": "US",
+            "province_code": "FL"
+        },
+        "shipping_lines": [
+            {
+                "id": 5360244982064,
+                "carrier_identifier": "71db376fea9d9b9b3c05efd465888fb6",
+                "code": "20",
+                "discounted_price": "146.54",
+                "discounted_price_set": {
+                    "shop_money": {
+                        "amount": "146.54",
+                        "currency_code": "USD"
+                    },
+                    "presentment_money": {
+                        "amount": "146.54",
+                        "currency_code": "USD"
+                    }
+                },
+                "is_removed": false,
+                "phone": null,
+                "price": "146.54",
+                "price_set": {
+                    "shop_money": {
+                        "amount": "146.54",
+                        "currency_code": "USD"
+                    },
+                    "presentment_money": {
+                        "amount": "146.54",
+                        "currency_code": "USD"
+                    }
+                },
+                "requested_fulfillment_service_id": null,
+                "source": "Y-NOT Rate Calculator Service - FEDEX",
+                "title": "FedEx Express Saver\u00ae",
+                "tax_lines": [],
+                "discount_allocations": []
+            }
+        ]
+    }
+}
