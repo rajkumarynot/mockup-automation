@@ -293,37 +293,17 @@
     </style>
 </head>
 <body>
-<!-- <div class="order-box">
-    <h2>Order ID: {{ $order_id }}</h2>
-    <p>Customer Name: {{ $data['customer']['first_name'] ?? '' }} {{ $data['customer']['last_name'] ?? '' }}</p>
-    <p>Email: {{ $data['email'] ?? '' }}</p>
-    <br>
-    <h3>Items</h3>
-    <table class="items-table">
-        <thead>
-        <tr><th>Product</th><th>Quantity</th><th>Price</th></tr>
-        </thead>
-        <tbody>
-        @foreach($data['line_items'] as $item)
-            <tr>
-                <td>{{ $item['title'] }}</td>
-                <td>{{ $item['quantity'] }}</td>
-                <td>{{ $item['price'] }}</td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
-</div> -->
+
 
 
  <div class="container">
       <div class="header">
         <h1>VIRTUAL PROOF APPROVAL</h1>
-        <img src="./Images/Y-Not_New-Logo-03 (003).png" alt="Y-Not Logo" />
+        <img src="{{ asset('storage/images/Y-Not_logo.png ') }}" alt="Y-Not Logo" />
       </div>
       <hr />
       <p><strong>Mockup Approval Required – Order ID: #{{ $order_id }}</strong></p>
-      <p>Dear {{ $data['customer']['first_name'] ?? '' }} {{ $data['customer']['last_name'] ?? '' }},</p>
+      <p>Dear {{ $customerName }},</p>
       <p>
           <!-- <p>Email: {{ $data['email'] ?? '' }}</p> -->
         Thank you for your order with Y-Not. Please find below the custom
@@ -352,19 +332,6 @@
       </div>
 
       <div class="black-bar">Attached Document Viewer:</div>
-      <!-- <iframe
-        src="AD6357_PROOF_STARLINE.pdf"
-        width="100%"
-        height="800px"
-        style="border: none"
-      ></iframe> -->
-
-      <!-- <iframe 
-    src="{{ asset('storage/app/public/pdfs/' . $order_id . '.pdf') }}" 
-    width="100%" 
-    height="800px"
-     style="border: none">
-</iframe> -->
 
 <iframe 
     src="{{ asset('storage/pdfs/' . $order_id . '.pdf') }}" 

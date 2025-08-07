@@ -15,14 +15,25 @@ class OrderAutomationController extends Controller
         return view('orders.index', compact('orders'));
     }
 
-    public function preview($orderId)
-    {
-        $order = OrderAutomation::where('order_id', $orderId)->firstOrFail();
-        $data = $order->shopify_data;
-        
-        // return view('html.preview', ['order_id' => $order_id]);
-        return view('html_templates.order_template', compact('data'));
+    public function preview($order_id)
+{
+    $order = OrderAutomation::where('order_id', $order_id)->first();
+
+    if (!$order) {
+        abort(404, 'Order not found');
     }
+    
+    $previewUrl = url('/html/preview/' . $order_id);
+    $customerName = $order->customer_name ?? 'Customer';
+
+    return view('html_templates.order_template', [
+        'order' => $order,
+        'order_id' => $order_id,
+        'previewUrl' => $previewUrl,
+        'customerName' => $customerName,
+    ]);
+}
+
 
 
     
@@ -64,27 +75,18 @@ class OrderAutomationController extends Controller
             return redirect()->back()->with('error', '❌ Customer email not found in order data.');
         }
 
-        // $previewUrl = url('/html/preview/' . $order_id);
 
-        // \Mail::raw("Hello $order->customer_name,\n\nYour mockup for Order #$order_id is ready.\nPreview it here: $previewUrl\n\n
-        // Regards,\nY-Not Team", 
-        // function ($message) use ($customerEmail) {
-        //     $message->to($customerEmail)
-        //             ->subject('Mockup Preview');
-        // });
-$previewUrl = url('/html/preview/' . $order_id);
+        $previewUrl = url('/html/preview/' . $order_id);
 
-\Mail::send('emails.mockup_ready', [
-    'order' => $order,
-    'orderId' => $order->order_id,
-    'customerName' => $order->customer_name,
-    'previewUrl' => $previewUrl, // ✅ add this
-], function ($message) use ($customerEmail, $order_id) {
-    $message->to($customerEmail)
-            ->subject("Mockup Ready - Order #$order_id");
-});
-
-
+        \Mail::send('emails.mockup_ready', [
+            'order' => $order,
+            'orderId' => $order->order_id,
+            'customerName' => $order->customer_name,
+            'previewUrl' => $previewUrl, // ✅ add this
+        ], function ($message) use ($customerEmail, $order_id) {
+            $message->to($customerEmail)
+                    ->subject("Mockup Ready - Order #$order_id");
+        });
 
 
 
@@ -102,6 +104,4 @@ $previewUrl = url('/html/preview/' . $order_id);
         return redirect()->back()->with('error', '❌ Failed to send email: ' . $e->getMessage());
     }
 }
-
-
 }

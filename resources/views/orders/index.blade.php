@@ -43,8 +43,9 @@
                     @endif
                 </td>
                 <td>
-                    <a href="{{ route('orders.preview', $order->order_id) }}" target="_blank" class="btn btn-sm btn-secondary">HTML Preview</a>
-                </td>
+<a href="{{ url('/html/preview/' . $order->order_id) }}" class="btn btn-sm btn-primary" target="_blank">
+    HTML Preview
+</a>                </td>
                 <td>
                     @if($order->email_sent)
                         <span class="badge bg-success">Sent</span>

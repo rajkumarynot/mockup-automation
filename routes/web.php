@@ -41,3 +41,6 @@ Route::post('/orders/send-mail/{orderId}', [OrderAutomationController::class, 's
 // Route::get('/preview/{order_id}', [\App\Http\Controllers\OrderAutomationController::class, 'preview'])->name('orders.preview');
 Route::get('/orders/send/{order_id}', [OrderAutomationController::class, 'sendPreviewEmail'])->name('orders.send');
 Route::post('/orders/send/{order_id}', [OrderAutomationController::class, 'sendPreviewEmail'])->name('orders.send');
+Route::get('/html/preview/{orderId}', [OrderAutomationController::class, 'preview']);
+
+
