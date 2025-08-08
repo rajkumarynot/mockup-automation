@@ -13,7 +13,9 @@ class OrderAutomation extends Model
     'html_path',
     'mail_sent',
     'customer_name',
-    'customer_email'
+    'customer_email',
+    'customer_response',
+    'response_note'
 ];
 
 }

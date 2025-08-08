@@ -104,4 +104,7 @@ class OrderAutomationController extends Controller
         return redirect()->back()->with('error', '❌ Failed to send email: ' . $e->getMessage());
     }
 }
+
+
+
 }

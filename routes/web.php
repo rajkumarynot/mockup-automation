@@ -42,5 +42,6 @@ Route::post('/orders/send-mail/{orderId}', [OrderAutomationController::class, 's
 Route::get('/orders/send/{order_id}', [OrderAutomationController::class, 'sendPreviewEmail'])->name('orders.send');
 Route::post('/orders/send/{order_id}', [OrderAutomationController::class, 'sendPreviewEmail'])->name('orders.send');
 Route::get('/html/preview/{orderId}', [OrderAutomationController::class, 'preview']);
+Route::post('/customer/response/{order_id}', [App\Http\Controllers\OrderController::class, 'storeCustomerResponse'])->name('customer.response');
 
 

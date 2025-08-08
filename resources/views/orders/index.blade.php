@@ -26,6 +26,8 @@
                 <th>PDF</th>
                 <th>HTML Preview</th>
                 <th>Status</th>
+                <th>Customer Response</th>
+                <th>Response Note</th>
                 <th>Updated</th>
             </tr>
         </thead>
@@ -43,9 +45,9 @@
                     @endif
                 </td>
                 <td>
-<a href="{{ url('/html/preview/' . $order->order_id) }}" class="btn btn-sm btn-primary" target="_blank">
-    HTML Preview
-</a>                </td>
+                    <a href="{{ url('/html/preview/' . $order->order_id) }}" class="btn btn-sm btn-primary" target="_blank">
+                        HTML Preview
+                    </a>                </td>
                 <td>
                     @if($order->email_sent)
                         <span class="badge bg-success">Sent</span>
@@ -58,6 +60,10 @@
                     @endif
                 </td>
 
+                <td > 
+                    <span class="badge bg-success">{{ $order->customer_response }}</span>
+                     </td>
+                <td>{{ $order->response_note }}</td>
                 <td>{{ $order->updated_at->format('d-m-Y H:i') }}</td>
             </tr>
             @endforeach

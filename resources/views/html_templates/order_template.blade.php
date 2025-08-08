@@ -352,36 +352,61 @@
       <p>Please click on one of the following buttons to proceed:</p>
       <p><span class="highlight">Note:</span> Kindly go through the Terms and Conditions on Page 2 and take action accordingly</p>
 
-      <div class="approval-buttons">
-        <button class="accept">Accept</button>
-        <button class="change" id="requestChangeBtn" type="button">Request for change *</button>
-      </div>
 
-      <!-- Request for Change Panel -->
-      <div class="requestChangesBtn">
+
+<form action="{{ route('customer.response', $order->order_id) }}" method="POST" id="responseForm">
+    @csrf
+
+    <div class="approval-buttons">
+<button class="accept" type="button" onclick="submitAccept()">Accept</button>
+        <button class="change" id="requestChangeBtn" type="button">Request for change *</button>
+    </div>
+
+    <!-- Request for Change Panel -->
+    <div class="requestChangesBtn">
         <div class="dropdown-section">
-          <button type="button" id="placementBtn">Placement Adjustments</button>
-          <button type="button" id="colorBtn">Color Modifications</button>
+            <button type="button" id="placementBtn">Placement Adjustments</button>
+            <button type="button" id="colorBtn">Color Modifications</button>
         </div>
 
         <div class="box-container">
-          <!-- Placement Box -->
-          <div class="box" id="placementBox">
-            <strong>Placement Adjustments Request</strong>
-            <p>Please describe the placement change (e.g. move logo to left).</p>
-            <textarea placeholder="Enter your comments here..."></textarea>
-            <button class="submit-placement">Submit Changes</button>
-          </div>
+            <!-- Placement Box -->
+            <div class="box" id="placementBox">
+                <strong>Placement Adjustments Request</strong>
+                <p>Please describe the placement change (e.g. move logo to left).</p>
+                <textarea id="placementText" placeholder="Enter your comments here..."></textarea>
+                <button class="submit-placement" type="button" onclick="submitResponse('Placement Adjustment')">Submit Changes</button>
+            </div>
 
-          <!-- Color Box -->
-          <div class="box" id="colorBox">
-            <strong>Color Modifications Request</strong>
-            <p>Please describe the color change (e.g. red to blue).</p>
-            <textarea placeholder="Enter your comments here..."></textarea>
-            <button class="submit-placement">Submit Changes</button>
-          </div>
+            <!-- Color Box -->
+            <div class="box" id="colorBox">
+                <strong>Color Modifications Request</strong>
+                <p>Please describe the color change (e.g. red to blue).</p>
+                <textarea id="colorText" placeholder="Enter your comments here..."></textarea>
+                <button class="submit-placement" type="button" onclick="submitResponse('Color Modification')">Submit Changes</button>
+            </div>
         </div>
-      </div>
+    </div>
+
+    <!-- Hidden fields to pass to backend -->
+    <input type="hidden" name="response" id="hiddenResponse">
+    <input type="hidden" name="response_note" id="hiddenNote">
+</form>
+
+
+        
+       
+
+
+
+
+        
+
+
+
+
+
+
 
       <div class="note">
 *Kindly look into this if customer Request for changes we have to provide the two dropdowns such that if he chooses anyone he should get a text box to fill the request changes accordingly
@@ -478,6 +503,29 @@
         <p>Thank you,<br />Y-Not Team</p>
       </div>
     </div>
+
+<script>
+function submitAccept() {
+    document.getElementById('hiddenResponse').value = 'Accepted';
+    document.getElementById('hiddenNote').value = ''; // No note for accepted
+    document.getElementById('responseForm').submit();
+}
+
+function submitResponse(type) {
+    let note = '';
+
+    if (type === 'Placement Adjustment') {
+        note = document.getElementById('placementText').value;
+    } else if (type === 'Color Modification') {
+        note = document.getElementById('colorText').value;
+    }
+
+    document.getElementById('hiddenResponse').value = type;
+    document.getElementById('hiddenNote').value = note;
+
+    document.getElementById('responseForm').submit();
+}
+</script>
 
 <script>
     

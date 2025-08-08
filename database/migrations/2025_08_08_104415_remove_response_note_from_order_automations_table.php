@@ -9,13 +9,12 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-   public function up()
-{
-    Schema::table('order_automations', function (Blueprint $table) {
-        $table->string('customer_response')->nullable(); // e.g. 'approved' or 'changes_requested'
-        $table->text('response_note')->nullable(); // if they add a comment
-    });
-}
+    public function up(): void
+    {
+        Schema::table('order_automations', function (Blueprint $table) {
+            //
+        });
+    }
 
     /**
      * Reverse the migrations.
