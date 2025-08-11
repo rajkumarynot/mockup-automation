@@ -13,7 +13,9 @@ class Kernel extends ConsoleKernel
 
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('read:emails')->everyMinute();
+        $schedule->command('read:emails')->everyFiveMinute();
+        $schedule->command('read:replies')->everyFivMinutes();
+
     }
 
     protected function commands()
@@ -21,4 +23,5 @@ class Kernel extends ConsoleKernel
         $this->load(__DIR__.'/Commands');
         require base_path('routes/console.php');
     }
+    
 }

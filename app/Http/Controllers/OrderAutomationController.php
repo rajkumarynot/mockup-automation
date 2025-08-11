@@ -105,6 +105,36 @@ class OrderAutomationController extends Controller
     }
 }
 
+public function handleCustomerResponse(Request $request, $order_id)
+{
+    $request->validate([
+        'response' => 'required|string',
+        'response_note' => 'nullable|string',
+    ]);
+
+    $order = OrderAutomation::where('order_id', $order_id)->first();
+
+    if (!$order) {
+        return back()->with('error', 'Order not found.');
+    }
+
+    // Save the response and note in DB
+    $order->response = $request->input('response'); // e.g., "Accepted", "Change Requested"
+    $order->response_note = $request->input('response_note');
+    $order->save();
+
+    // Send notification email to admin
+    $adminEmail = config('mail.admin_email'); // Make sure you set this in .env
+
+    \Mail::send('emails.customer_response_notification', [
+        'order' => $order,
+    ], function ($message) use ($adminEmail, $order) {
+        $message->to($adminEmail)
+            ->subject("New Response from Customer for Order #{$order->order_id}");
+    });
+
+    return back()->with('success', 'Your response has been received. Thank you!');
+}
 
 
 }

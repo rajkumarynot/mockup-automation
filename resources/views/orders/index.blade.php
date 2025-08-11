@@ -30,7 +30,7 @@
                 <th>HTML Preview</th>
                 <th>Status</th>
                 <th>Customer Response</th>
-                <th>Response Note</th>
+                <th>Customer Response Note</th>
                 <th>Updated</th>
             </tr>
         </thead>
@@ -65,14 +65,14 @@
 
 
 <td>
-    @if (!$order->customer_response)
+    @if (!$order->response)
         <!-- <span class="badge bg-success text-white">Accepted</span> -->
-    @elseif (str_contains($order->customer_response, 'Placement'))
+    @elseif (str_contains($order->response, 'Placement'))
         <span class="badge bg-danger text-white">Placement Adjustments</span>
-    @elseif (str_contains($order->customer_response, 'Color'))
+    @elseif (str_contains($order->response, 'Color'))
         <span class="badge bg-danger text-white">Color Modifications</span>
     @else
-        <span class="badge bg-success text-white">{{ $order->customer_response }}</span>
+        <span class="badge bg-success text-white">{{ $order->response }}</span>
     @endif
 </td>
 

@@ -14,7 +14,7 @@ class OrderAutomation extends Model
     'mail_sent',
     'customer_name',
     'customer_email',
-    'customer_response',
+    'response',
     'response_note'
 ];
 

@@ -16,6 +16,10 @@ return [
 
     'default' => env('MAIL_MAILER', 'log'),
 
+   
+    'admin_email' => env('MAIL_ADMIN_EMAIL', 'rjksharma23@gmail.com'),
+
+
     /*
     |--------------------------------------------------------------------------
     | Mailer Configurations
