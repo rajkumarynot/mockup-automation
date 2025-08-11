@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
 
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('read:emails')->everyFiveMinutes();
+        $schedule->command('read:emails')->everyMinute();
     }
 
     protected function commands()

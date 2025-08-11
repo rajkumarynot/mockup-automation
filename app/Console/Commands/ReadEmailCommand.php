@@ -94,12 +94,17 @@ class ReadEmailCommand extends Command
                     if ($customerEmail) {
                         $previewUrl = url("/html/preview/{$orderId}");
 
-                        Mail::to($customerEmail)->send(new MockupPreviewMail($orderId, $previewUrl, $customerName));
+
+
+                        // Automatic mail will send to customer code start here
+
+
+                        // Mail::to($customerEmail)->send(new MockupPreviewMail($orderId, $previewUrl, $customerName));
 
                         OrderAutomation::updateOrCreate(
                             ['order_id' => $orderId],
                             [
-                                'mail_sent'       => true,
+                                'mail_sent'       => false,
                                 'customer_name'   => $customerName,
                                 'customer_email'  => $customerEmail,
                             ]
@@ -107,6 +112,12 @@ class ReadEmailCommand extends Command
 
                         $this->info("✅ Sent email to customer: {$customerEmail}");
                         $this->info("✅ Customer info stored in order_automations: {$customerName} ({$customerEmail})");
+                        
+                        
+                        // Automatic mail will send to customer code end here
+
+
+
                 } else {
                     $this->warn("⚠️  No customer email found for Order: {$orderId}");
 }
