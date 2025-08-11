@@ -304,6 +304,7 @@
       <hr />
       <p><strong>Mockup Approval Required – Order ID: #{{ $order_id }}</strong></p>
       <p>Dear {{ $customerName }},</p>
+      
       <p>
           <!-- <p>Email: {{ $data['email'] ?? '' }}</p> -->
         Thank you for your order with Y-Not. Please find below the custom

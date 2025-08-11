@@ -59,10 +59,14 @@ class ReadEmailCommand extends Command
 
                     if ($data) {
                         // ---- STEP 5: HTML CREATION ----
-                        $html = view('html_templates.order_template', [
-                            'order_id' => $orderId,
-                            'data'     => $data['order'] ?? $data
-                        ])->render();
+                        $order = OrderAutomation::where('order_id', $orderId)->first();
+
+                    $html = view('html_templates.order_template', [
+                        'order_id'     => $orderId,
+                        'data'         => $data['order'] ?? $data,
+                        'customerName' => $order->customer_name ?? 'Customer',
+                        'order'        => $order
+                    ])->render();
 
                         $htmlPath = storage_path("app/html/{$orderId}.html");
                         file_put_contents($htmlPath, $html);
@@ -79,32 +83,32 @@ class ReadEmailCommand extends Command
 
                    $customerEmail = $data['order']['email'] ?? null;
 
-$customerName = 'Customer';
-$first = $data['order']['customer']['first_name'] ?? '';
-$last = $data['order']['customer']['last_name'] ?? '';
-$fullName = trim("$first $last");
-if ($fullName !== '') {
-    $customerName = $fullName;
-}
+                    $customerName = 'Customer';
+                    $first = $data['order']['customer']['first_name'] ?? '';
+                    $last = $data['order']['customer']['last_name'] ?? '';
+                    $fullName = trim("$first $last");
+                    if ($fullName !== '') {
+                        $customerName = $fullName;
+                    }
 
-if ($customerEmail) {
-    $previewUrl = url("/html/preview/{$orderId}");
+                    if ($customerEmail) {
+                        $previewUrl = url("/html/preview/{$orderId}");
 
-    Mail::to($customerEmail)->send(new MockupPreviewMail($orderId, $previewUrl, $customerName));
+                        Mail::to($customerEmail)->send(new MockupPreviewMail($orderId, $previewUrl, $customerName));
 
-    OrderAutomation::updateOrCreate(
-        ['order_id' => $orderId],
-        [
-            'mail_sent'       => true,
-            'customer_name'   => $customerName,
-            'customer_email'  => $customerEmail,
-        ]
-    );
+                        OrderAutomation::updateOrCreate(
+                            ['order_id' => $orderId],
+                            [
+                                'mail_sent'       => true,
+                                'customer_name'   => $customerName,
+                                'customer_email'  => $customerEmail,
+                            ]
+                        );
 
-    $this->info("✅ Sent email to customer: {$customerEmail}");
-    $this->info("✅ Customer info stored in order_automations: {$customerName} ({$customerEmail})");
-} else {
-    $this->warn("⚠️  No customer email found for Order: {$orderId}");
+                        $this->info("✅ Sent email to customer: {$customerEmail}");
+                        $this->info("✅ Customer info stored in order_automations: {$customerName} ({$customerEmail})");
+                } else {
+                    $this->warn("⚠️  No customer email found for Order: {$orderId}");
 }
 
 

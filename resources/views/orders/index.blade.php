@@ -77,7 +77,7 @@
 </td>
 
                 <td>{{ $order->response_note }}</td>
-                <td>{{ $order->updated_at->format('d-m-Y H:i') }}</td>
+<td>{{ $order->updated_at->timezone('Asia/Kolkata')->format('d-m-Y H:i') }}</td>
             </tr>
             @endforeach
         </tbody>
