@@ -416,7 +416,7 @@
       <div class="terms-page">
         <div class="header">
           <h1>MOCKUP APPROVAL</h1>
-          <img src="./Images/Y-Not_New-Logo-03 (003).png" alt="Y-Not Logo" />
+          <img src="{{ asset('storage/images/Y-Not_logo.png ') }}" alt="Y-Not Logo" />
         </div>
         <hr />
         <div class="black-bar">

@@ -16,7 +16,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="p-4">
-    <h2>Processed Orders</h2>
+    <div style="float:left" class="p-4 d-flex justify-content-center align-items-center">
+    <img style="width:180px;" class="img-fluid" src="{{ asset('storage/images/Y-Not_logo.png ') }}" alt="Y-Not Logo" />
+    <h2  class="mb-0"> Processed Orders</h2>
+    </div>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -60,9 +63,19 @@
                     @endif
                 </td>
 
-                <td > 
-                    <span class="badge bg-success">{{ $order->customer_response }}</span>
-                     </td>
+
+<td>
+    @if (!$order->customer_response)
+        <!-- <span class="badge bg-success text-white">Accepted</span> -->
+    @elseif (str_contains($order->customer_response, 'Placement'))
+        <span class="badge bg-danger text-white">Placement Adjustments</span>
+    @elseif (str_contains($order->customer_response, 'Color'))
+        <span class="badge bg-danger text-white">Color Modifications</span>
+    @else
+        <span class="badge bg-success text-white">{{ $order->customer_response }}</span>
+    @endif
+</td>
+
                 <td>{{ $order->response_note }}</td>
                 <td>{{ $order->updated_at->format('d-m-Y H:i') }}</td>
             </tr>
