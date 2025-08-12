@@ -71,12 +71,15 @@ class ReadEmailCommand extends Command
                         $htmlPath = storage_path("app/html/{$orderId}.html");
                         file_put_contents($htmlPath, $html);
 
+                        $senderEmail = $message->getFrom()[0]->mail ?? null; // actual sender email of the reply
+
                         OrderAutomation::updateOrCreate(
                             ['order_id' => $orderId],
                             [
                                 'pdf_path'      => $filePath,
                                 'shopify_data'  => $data,
-                                'html_path'     => $htmlPath
+                                'html_path'     => $htmlPath,
+                                'sender_email' => $senderEmail,
                             ]
                         );
                     }

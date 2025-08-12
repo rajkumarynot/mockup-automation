@@ -125,6 +125,15 @@ public function handleCustomerResponse(Request $request, $order_id)
 
     // Send notification email to admin
     $adminEmail = config('mail.admin_email'); // Make sure you set this in .env
+    $senderEmail = $order->sender_email;
+    $response = $order->response;
+    if($response == "Accepted"){
+         \Mail::send('emails.customer_response_notification', ['order' => $order], function ($message) use ($senderEmail, $order) {
+            $message->to($senderEmail)
+                ->subject("Customer Accepted Order #{$order->order_id}");
+        });
+    }
+
 
     \Mail::send('emails.customer_response_notification', [
         'order' => $order,

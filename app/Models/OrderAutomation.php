@@ -8,6 +8,7 @@ class OrderAutomation extends Model
 {
    protected $fillable = [
     'order_id',
+    'sender_email',
     'pdf_path',
     'shopify_data',
     'html_path',
